@@ -3,13 +3,16 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "new": "nodemon src/server.js",
+    "new-s": "sucrase-node src/server.js"
   },
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "express": "^4.19.2",
+    "sucrase": "^3.35.0",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
