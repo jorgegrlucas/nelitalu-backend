@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.19.2",
+    "mongoose": "^8.5.3",
     "sucrase": "^3.35.0",
     "yarn": "^1.22.22"
   },

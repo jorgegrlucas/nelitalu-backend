@@ -1,17 +1,20 @@
 import express from 'express';
 import routes from './routes'
+import mongoose  from 'mongoose';
 
 class App{
 
     constructor(){
         this.server = express();
 
+        mongoose.connect('mongodb+srv://jorgegrlucas:484Ingrid399@nelitalu-backend.gkley.mongodb.net/nelitali-backend?retryWrites=true&w=majority&appName=nelitalu-backend')
+
         this.middlewares();
         this.routes();
     }
 
     middlewares(){
-        this.server.unsubscribe(express.json());
+        this.server.use(express.json());
     }
 
     routes(){
@@ -20,5 +23,4 @@ class App{
 
 }
 
-// module.exports = new App().server;
 export default new App().server;
