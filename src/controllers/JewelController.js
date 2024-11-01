@@ -1,4 +1,3 @@
-import { json } from "express";
 import Jewel from "../models/Jewel";
 import * as Yup from 'yup';
 
@@ -24,7 +23,7 @@ class JewelController{
         const {filename} = req.file;
         const {jewel_id} = req.params;
         const {description, name, price, active} = req.body
-        
+
         if(!(await schema.isValid(req.body))){
             return res.status(400).json({ error: 'Falha na validacao'})
         }

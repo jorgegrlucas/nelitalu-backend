@@ -4,7 +4,7 @@ class DashboardController{
     async show(req, res){
 
         const jewels = await Jewel.find({})
-        return res.json({ok: true})
+        return res.json({ok: jewels})
     }
 }
 

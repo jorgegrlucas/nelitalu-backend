@@ -1,5 +1,4 @@
 import Reserve from "../models/Reserve";
-import User from "../models/User";
 import Jewel from "../models/Jewel";
 
 class ReserveController{
@@ -36,7 +35,7 @@ class ReserveController{
 
         // await reserves.populate('jewel');
 
-        return res.json(reserves); 
+        return res.json(reserves);
 
     }
 
@@ -44,7 +43,7 @@ class ReserveController{
         const {reserve_id} = req.body
         const result = await Reserve.findByIdAndDelete({_id: reserve_id})
 
-        if(!result) return res.json({message: "Essa reserva não existe"})        
+        if(!result) return res.json({message: "Essa reserva não existe"})
 
         return res.json({message: "excluido"})
     }

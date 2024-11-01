@@ -20,6 +20,12 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-prettier": "^0.0.0-empty",
+    "globals": "^15.11.0",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3"
   }
 }

@@ -1,4 +1,4 @@
-import { Schema, SchemaType, model } from "mongoose";
+import { Schema,  model } from "mongoose";
 
 const CartSchema = new Schema({
     email: String,
