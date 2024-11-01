@@ -5,6 +5,7 @@ import multer from 'multer';
 import uploadConfig from './config/upload';
 import DashboardController from './controllers/DashboardController'
 import CartController from './controllers/CartController';
+import ReserveController from './controllers/ReserveController';
 
 const routes = new Router();
 const upload = multer(uploadConfig)
@@ -23,5 +24,10 @@ routes.get('/dashboard',  DashboardController.show)
 
 //Cart
 routes.post('/cart/:jewel_id/add',  CartController.store)
+
+//Reserva
+routes.post('/jewels/:jewel_id/reserve', ReserveController.store)
+routes.get('/reserves', ReserveController.index);
+routes.delete('/reserves/cancel', ReserveController.destroy);
 
 export default routes;
