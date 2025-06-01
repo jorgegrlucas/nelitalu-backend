@@ -9,6 +9,10 @@ class App{
     constructor(){
         this.server = express();
 
+        mongoose.connection.on('error', (err) => {
+            console.error('Erro de conexão:', err);
+        });
+
         mongoose.connect('mongodb+srv://jorgegrlucas:484Ingrid399@nelitalu-backend.gkley.mongodb.net/nelitali-backend?retryWrites=true&w=majority&appName=nelitalu-backend')
 
         this.middlewares();

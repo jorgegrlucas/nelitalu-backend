@@ -1,1 +1,2 @@
 rodar app: yarn new-s
+entrar na url do backend: https://localhost:3333/jewels
