@@ -6,12 +6,19 @@ import uploadConfig from './config/upload';
 import DashboardController from './controllers/DashboardController'
 import CartController from './controllers/CartController';
 import ReserveController from './controllers/ReserveController';
+//USER
+import { CreateUserController } from "./controllers/user/CreateUserController";
+import { AuthUserController } from "./controllers/user/AuthUserController";
+// import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 const routes = new Router();
 const upload = multer(uploadConfig)
 
 //CRUD sessão
 routes.post('/sessions', SessionController.store)
+
+routes.post("/user", new CreateUserController().handle);
+routes.post("/auth", new AuthUserController().handle);
 
 //CRUD Jóias
 routes.post('/jewels', upload.single('thumbnail'), JewelController.store)
