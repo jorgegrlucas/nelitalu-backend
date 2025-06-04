@@ -4,7 +4,6 @@ import User from "../../models/User"; // Importa o modelo Mongoose
 
 class CreateUserService {
     async execute({ name, email, password }: CreateUserRequest) {
-        console.log("execute create user");
         if (!email) {
             throw new Error("Email incorrect");
         }

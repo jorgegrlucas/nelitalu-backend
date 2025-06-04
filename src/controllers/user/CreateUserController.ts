@@ -5,7 +5,6 @@ import { CreateUserService } from "../../services/user/CreateUserService";
 class CreateUserController {
     async handle(request: Request, response: Response) {
         const { name, email, password } = request.body as CreateUserRequest;
-        console.log("handle", name, email, password);
 
         // Validação de campos (opcional, mas recomendado)
         if (!name || !email || !password) {

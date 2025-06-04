@@ -7,13 +7,11 @@ async function gerarHash(password: string) {
     // 8 é o custo de salt; ajuste conforme necessário
     const senhaHash = await hash(password, 8);
 
-    console.log("Hash gerado:", senhaHash);
     return senhaHash;
 }
 
 class AuthUserService {
     async execute({ email, password }: AuthUserRequest) {
-        console.log("Execute: ", email, password);
         if (!email) {
             throw new Error("Email precisa ser enviado!");
         }
@@ -32,8 +30,6 @@ class AuthUserService {
         // const senhaHash = await gerarHash(user.password);
         // Comparar senhas
         const passwordMatch = await compare(password, user.password);
-
-        console.log("Match?", passwordMatch);
 
         if (!passwordMatch) {
             throw new Error("Wrong password");
