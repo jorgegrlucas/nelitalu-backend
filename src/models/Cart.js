@@ -1,15 +1,21 @@
-import { Schema,  model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const CartSchema = new Schema({
-    email: String,
+    email: String, // opcional
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: "User",
+        required: true,
     },
-    jewel:{
+    jewel: {
         type: Schema.Types.ObjectId,
-        ref: 'Jewel'
-    }
+        ref: "Jewel",
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
-export default model('Cart', CartSchema)
+export default model("Cart", CartSchema);

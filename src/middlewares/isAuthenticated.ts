@@ -22,7 +22,7 @@ export function isAuthenticated(
             token,
             process.env.JWT_SECRET as string,
         ) as Payload;
-        request.user_id = sub;
+        request.userId = sub;
         return next(); // Deixa que a requisição prossiga
     } catch (error) {
         return response.status(401).end();
