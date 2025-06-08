@@ -12,6 +12,7 @@ import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { PaypalController } from "./controllers/PaypalController";
+import SaleController from "./controllers/SaleController";
 
 const routes = new Router();
 // const upload = multer(uploadConfig);
@@ -65,6 +66,8 @@ routes.get(
     isAuthenticated,
     FavoriteController.listByUser,
 );
+
+routes.put("/product/sale", isAuthenticated, SaleController.store);
 
 //PayPal
 routes.post("/paypal/create-order", PaypalController.createOrder);

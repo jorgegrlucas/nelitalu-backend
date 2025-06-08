@@ -7,7 +7,7 @@ const JewelSchema = new Schema(
         description: String,
         price: Number,
         active: Boolean,
-        amount: Number,
+        amount: { type: Number, required: true, default: 0 },
     },
     {
         toJSON: {
