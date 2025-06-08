@@ -2,8 +2,8 @@ import Cart from "../models/Cart";
 
 class CartController {
     async store(req, res) {
-        const userId = req.userId; // vem do middleware JWT
-        const { jewelId } = req.body;
+        const userId = req.userId;
+        const { jewelId, quantity = 1 } = req.body;
 
         if (!jewelId) {
             return res
@@ -13,16 +13,24 @@ class CartController {
 
         try {
             // Verifica se o produto já está no carrinho do usuário
-            const exists = await Cart.findOne({ user: userId, jewel: jewelId });
-            if (exists) {
-                return res
-                    .status(200)
-                    .json({ message: "Produto já está no carrinho!" });
+            const existingItem = await Cart.findOne({
+                user: userId,
+                jewel: jewelId,
+            });
+
+            if (existingItem) {
+                // Atualiza a quantidade
+                existingItem.quantity += quantity;
+                await existingItem.save();
+
+                return res.status(200).json(existingItem);
             }
 
+            // Cria novo item
             const newCartItem = await Cart.create({
                 user: userId,
                 jewel: jewelId,
+                quantity: quantity,
             });
 
             return res.status(201).json(newCartItem);
@@ -48,6 +56,45 @@ class CartController {
             return res
                 .status(500)
                 .json({ message: "Erro ao buscar o carrinho do usuário." });
+        }
+    }
+
+    async updateQuantity(req, res) {
+        const userId = req.userId;
+        const { cartItemId, quantity } = req.body;
+
+        if (!cartItemId || typeof quantity !== "number") {
+            return res.status(400).json({ message: "Dados inválidos" });
+        }
+
+        try {
+            const cartItem = await Cart.findOne({
+                _id: cartItemId,
+                user: userId,
+            });
+
+            if (!cartItem) {
+                return res
+                    .status(404)
+                    .json({ message: "Item não encontrado no carrinho." });
+            }
+
+            if (quantity <= 0) {
+                await Cart.deleteOne({ _id: cartItemId });
+                return res
+                    .status(200)
+                    .json({ message: "Item removido do carrinho." });
+            }
+
+            cartItem.quantity = quantity;
+            await cartItem.save();
+
+            return res.status(200).json(cartItem);
+        } catch (error) {
+            console.error(error);
+            return res
+                .status(500)
+                .json({ message: "Erro ao atualizar quantidade." });
         }
     }
 

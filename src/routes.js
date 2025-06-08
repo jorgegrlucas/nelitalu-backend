@@ -45,6 +45,11 @@ routes.get("/dashboard", DashboardController.show);
 //Cart
 routes.post("/cart/add", isAuthenticated, CartController.store);
 routes.get("/cart", isAuthenticated, CartController.index);
+routes.post(
+    "/cart/update-quantity",
+    isAuthenticated,
+    CartController.updateQuantity,
+);
 routes.delete("/cart/:cartItemId", isAuthenticated, CartController.destroy);
 
 //Reserva
