@@ -11,6 +11,7 @@ import ReserveController from "./controllers/ReserveController";
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
+import { PaypalController } from "./controllers/PaypalController";
 
 const routes = new Router();
 // const upload = multer(uploadConfig);
@@ -59,5 +60,9 @@ routes.get(
     isAuthenticated,
     FavoriteController.listByUser,
 );
+
+//PayPal
+routes.post("/paypal/create-order", PaypalController.createOrder);
+routes.post("/paypal/capture-order", PaypalController.captureOrder);
 
 export default routes;
