@@ -12,21 +12,18 @@ class CartController {
         }
 
         try {
-            // Verifica se o produto já está no carrinho do usuário
             const existingItem = await Cart.findOne({
                 user: userId,
                 jewel: jewelId,
             });
 
             if (existingItem) {
-                // Atualiza a quantidade
                 existingItem.quantity += quantity;
                 await existingItem.save();
 
                 return res.status(200).json(existingItem);
             }
 
-            // Cria novo item
             const newCartItem = await Cart.create({
                 user: userId,
                 jewel: jewelId,
@@ -46,7 +43,6 @@ class CartController {
         const userId = req.userId;
 
         try {
-            // Busca todos os itens do carrinho do usuário logado
             const cartItems = await Cart.find({ user: userId }).populate(
                 "jewel",
             );
@@ -103,7 +99,6 @@ class CartController {
         const { cartItemId } = req.params;
 
         try {
-            // Verifica se o item existe e pertence ao usuário
             const cartItem = await Cart.findOne({
                 _id: cartItemId,
                 user: userId,
@@ -126,8 +121,6 @@ class CartController {
                 .json({ message: "Erro ao remover item do carrinho." });
         }
     }
-
-    // Adicione outras funções: exibir carrinho, remover item, etc.
 }
 
 export default new CartController();

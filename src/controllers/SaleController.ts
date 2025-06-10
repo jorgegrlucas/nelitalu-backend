@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
-import Jewel from "../models/Jewel"; // seu model de produto, antes chamado Jewel ou Product
+import Jewel from "../models/Jewel";
 
 class SaleController {
-    // Body: { amount: number }, Query: ?product_id=...
     async store(req: Request, res: Response) {
-        // const userId = req.userId; // opcional, se quiser auditar quem vendeu
         const { amount } = req.body;
         const productId = req.query.product_id as string;
 
@@ -18,7 +16,6 @@ class SaleController {
         }
 
         try {
-            // Busca o produto
             const product = await Jewel.findById(productId);
             if (!product) {
                 return res
@@ -26,14 +23,12 @@ class SaleController {
                     .json({ message: "Produto não encontrado" });
             }
 
-            // Verifica estoque
             if (product.amount < amount) {
                 return res
                     .status(400)
                     .json({ message: "Estoque insuficiente para essa venda" });
             }
 
-            // Dá baixa no estoque
             product.amount -= amount;
             await product.save();
 

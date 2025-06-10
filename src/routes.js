@@ -30,7 +30,7 @@ routes.post(
     // upload.single("thumbnail"),
     JewelController.store,
 );
-routes.get("/products", isAuthenticated, JewelController.index); //teste rota
+routes.get("/products", isAuthenticated, JewelController.index);
 routes.put(
     // "/jewels/:jewel_id",
     "/product/edit",

@@ -78,6 +78,19 @@ class JewelController {
 
         return res.json({ message: "excluido" });
     }
+
+    async check(productId, amount) {
+        return await Jewel.findById(productId)
+            .then((user) => {
+                if (user) {
+                    return amount <= user.amount;
+                }
+                return false;
+            })
+            .catch(() => {
+                return false;
+            });
+    }
 }
 
 export default new JewelController();

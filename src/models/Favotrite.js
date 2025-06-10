@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const FavoriteSchema = new mongoose.Schema({
     userId: {
-        type: mongoose.Schema.Types.ObjectId, // ou String, conforme o id do usuário
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User",
     },
     productId: {
-        type: mongoose.Schema.Types.ObjectId, // ou String, conforme o id do produto
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Product",
     },

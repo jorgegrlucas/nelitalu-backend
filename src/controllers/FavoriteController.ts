@@ -4,8 +4,8 @@ import Favorite from "../models/Favotrite";
 
 export default {
     async add(req: Request, res: Response) {
-        const { productId } = req.body; // vem do Angular
-        const userId = req.userId; // vem do middleware JWT
+        const { productId } = req.body;
+        const userId = req.userId;
 
         if (!userId) {
             return res
@@ -55,8 +55,7 @@ export default {
     },
 
     async listByUser(req: Request, res: Response) {
-        const userId = req.userId; // vem do middleware JWT
-        console.log("listByUser: ", userId);
+        const userId = req.userId;
 
         if (!userId) {
             return res

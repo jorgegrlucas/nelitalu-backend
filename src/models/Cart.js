@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const CartSchema = new Schema({
-    email: String, // opcional
+    email: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: "User",

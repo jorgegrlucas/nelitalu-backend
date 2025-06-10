@@ -19,7 +19,7 @@ export const PaypalController = {
                         {
                             amount: {
                                 currency_code: "BRL",
-                                value: "100.00", // Substitua pelo subtotal real!
+                                value: "100.00",
                             },
                         },
                     ],

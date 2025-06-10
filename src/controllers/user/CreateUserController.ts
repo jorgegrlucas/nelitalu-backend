@@ -6,7 +6,6 @@ class CreateUserController {
     async handle(request: Request, response: Response) {
         const { name, email, password } = request.body as CreateUserRequest;
 
-        // Validação de campos (opcional, mas recomendado)
         if (!name || !email || !password) {
             return response
                 .status(400)

@@ -6,12 +6,15 @@ class AuthUserController {
     async handle(request: Request, response: Response) {
         const { email, password }: AuthUserRequest = request.body;
         const authUserService = new AuthUserService();
-        const auth = await authUserService.execute({
-            email,
-            password,
-        });
 
-        return response.json(auth);
+        try {
+            const auth = await authUserService.execute({ email, password });
+            return response.json(auth);
+        } catch (err: any) {
+            return response.status(500).json({
+                error: err.message,
+            });
+        }
     }
 }
 
