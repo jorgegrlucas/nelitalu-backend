@@ -1,6 +1,6 @@
 import { hash } from "bcryptjs";
 import { CreateUserRequest } from "../../models/interfaces/user/CreateUserRequest";
-import User from "../../models/User";«
+import User from "../../models/User";
 
 class CreateUserService {
     async execute({ name, email, password }: CreateUserRequest) {
