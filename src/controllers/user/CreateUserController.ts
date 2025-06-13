@@ -4,7 +4,8 @@ import { CreateUserService } from "../../services/user/CreateUserService";
 
 class CreateUserController {
     async handle(request: Request, response: Response) {
-        const { name, email, password } = request.body as CreateUserRequest;
+        const { name, email, password, address, contact } =
+            request.body as CreateUserRequest;
 
         if (!name || !email || !password) {
             return response
@@ -19,6 +20,8 @@ class CreateUserController {
                 name,
                 email,
                 password,
+                address,
+                contact,
             });
 
             return response.status(201).json(user);

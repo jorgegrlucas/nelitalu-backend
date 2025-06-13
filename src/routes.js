@@ -2,11 +2,10 @@ import { Router } from "express";
 import SessionController from "./controllers/SessionController";
 import JewelController from "./controllers/JewelController";
 import FavoriteController from "./controllers/FavoriteController";
-// import multer from "multer";
-// import uploadConfig from "./config/upload";
+import multer from "multer";
+import uploadConfig from "./config/upload";
 import DashboardController from "./controllers/DashboardController";
 import CartController from "./controllers/CartController";
-import ReserveController from "./controllers/ReserveController";
 //USER
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
@@ -15,7 +14,7 @@ import { PaypalController } from "./controllers/PaypalController";
 import SaleController from "./controllers/SaleController";
 
 const routes = new Router();
-// const upload = multer(uploadConfig);
+const upload = multer(uploadConfig);
 
 //CRUD sessão
 routes.post("/sessions", SessionController.store);
@@ -27,15 +26,14 @@ routes.post("/auth", new AuthUserController().handle);
 routes.post(
     "/product",
     isAuthenticated,
-    // upload.single("thumbnail"),
+    upload.single("thumbnail"),
     JewelController.store,
 );
 routes.get("/products", isAuthenticated, JewelController.index);
 routes.put(
-    // "/jewels/:jewel_id",
     "/product/edit",
     isAuthenticated,
-    // upload.single("thumbnail"),
+    upload.single("thumbnail"),
     JewelController.update,
 );
 routes.delete("/product/delete/:product_id", JewelController.destroy);
@@ -46,17 +44,13 @@ routes.get("/dashboard", DashboardController.show);
 //Cart
 routes.post("/cart/add", isAuthenticated, CartController.store);
 routes.get("/cart", isAuthenticated, CartController.index);
+routes.delete("/cart", isAuthenticated, CartController.clearCart);
 routes.post(
     "/cart/update-quantity",
     isAuthenticated,
     CartController.updateQuantity,
 );
 routes.delete("/cart/:cartItemId", isAuthenticated, CartController.destroy);
-
-//Reserva
-routes.post("/jewels/:jewel_id/reserve", ReserveController.store);
-routes.get("/reserves", ReserveController.index);
-routes.delete("/reserves/cancel", ReserveController.destroy);
 
 //Favoritos
 routes.post("/favorites/add", isAuthenticated, FavoriteController.add);

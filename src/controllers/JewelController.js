@@ -23,7 +23,7 @@ class JewelController {
             amount: Yup.number().required(),
         });
 
-        // const { filename } = req.file;
+        const { filename } = req.file;
         const { description, name, price, amount, product_id } = req.body;
 
         if (!(await schema.isValid(req.body))) {
@@ -33,7 +33,7 @@ class JewelController {
         await Jewel.updateOne(
             { _id: product_id },
             {
-                // thumbnail: filename,
+                thumbnail: filename,
                 description: description,
                 name: name,
                 price: price,
@@ -49,11 +49,10 @@ class JewelController {
             description: Yup.string().required(),
             name: Yup.string().required(),
             price: Yup.number().required(),
-            // active: Yup.boolean().required(),
             amount: Yup.number().required(),
         });
 
-        // const { filename } = req.file;
+        const { filename } = req.file;
         const { description, name, price, amount } = req.body;
 
         if (!(await schema.isValid(req.body))) {
@@ -61,11 +60,10 @@ class JewelController {
         }
 
         const jewel = await Jewel.create({
-            // thumbnail: filename,
+            thumbnail: filename,
             description: description,
             name: name,
             price: price,
-            // active: active,
             amount: amount,
         });
 

@@ -3,7 +3,13 @@ import { CreateUserRequest } from "../../models/interfaces/user/CreateUserReques
 import User from "../../models/User";
 
 class CreateUserService {
-    async execute({ name, email, password }: CreateUserRequest) {
+    async execute({
+        name,
+        email,
+        password,
+        address,
+        contact,
+    }: CreateUserRequest) {
         if (!email) {
             throw new Error("Email incorrect");
         }
@@ -20,6 +26,8 @@ class CreateUserService {
             name,
             email,
             password: passwordHash,
+            address,
+            contact,
         });
 
         await user.save();
